@@ -1,0 +1,8 @@
+{
+  "name": "KODIK - Marketplace UMKM Karawang",
+  "description": "KODIK (Karawang Online Digital Inovasi Karya) is a digital marketplace for local MSME products from Karawang, focusing on providing a seamless shopping experience for buyers. It features product search, a shopping cart, and local content.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
