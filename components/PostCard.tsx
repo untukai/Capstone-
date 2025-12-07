@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { Post, Comment } from '../types';
 // FIX: Import `posts` as `initialPosts` to access the global posts array.
@@ -133,59 +132,69 @@ const PostCard: React.FC<PostCardProps> = ({ post: initialPost }) => {
     const topLevelComments = comments.filter(c => !c.parentId);
 
     return (
-        <div className="bg-white dark:bg-neutral-800 dark:border dark:border-neutral-700 rounded-lg shadow-md overflow-hidden">
-            <div className="p-4">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center overflow-hidden">
+        <div className="bg-white dark:bg-neutral-800 dark:border dark:border-neutral-700 rounded-2xl shadow-md overflow-hidden mb-6">
+            <div className="p-4 pb-2">
+                <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center overflow-hidden border border-neutral-100 dark:border-neutral-700">
                       {seller.imageUrl ? (
                         <img src={seller.imageUrl} alt={seller.name} className="w-full h-full object-cover" />
                       ) : (
-                        <StoreIcon className="w-6 h-6 text-primary" />
+                        <StoreIcon className="w-5 h-5 text-primary" />
                       )}
                     </div>
                     <div>
-                        <p className="font-bold text-neutral-800 dark:text-neutral-100">{seller.name}</p>
+                        <p className="font-bold text-neutral-900 dark:text-neutral-100 text-sm leading-tight">{seller.name}</p>
                         <p className="text-xs text-neutral-500 dark:text-neutral-400">{timeAgo(post.timestamp)}</p>
                     </div>
                 </div>
-                <p className="text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap">{post.content}</p>
+                <p className="text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap text-sm leading-relaxed mb-3">{post.content}</p>
             </div>
             
             {post.mediaUrl && (
-                <div className="w-full bg-black flex items-center justify-center">
-                    {post.mediaType === 'video' ? (
-                        <video src={post.mediaUrl} controls className="w-full max-h-96" />
-                    ) : (
-                        <img src={post.mediaUrl} alt="Post content" className="w-full h-auto max-h-96 object-contain" />
-                    )}
+                <div className="px-3 pb-3">
+                    <div className="p-1.5 bg-neutral-100 dark:bg-neutral-700 rounded-2xl border border-neutral-200 dark:border-neutral-600">
+                        {post.mediaType === 'video' ? (
+                            <video 
+                                src={post.mediaUrl} 
+                                controls 
+                                className="w-full h-auto max-h-[500px] rounded-xl object-contain bg-black" 
+                            />
+                        ) : (
+                            <img 
+                                src={post.mediaUrl} 
+                                alt="Post content" 
+                                className="w-full h-auto max-h-[500px] rounded-xl object-cover bg-neutral-200 dark:bg-neutral-800" 
+                            />
+                        )}
+                    </div>
                 </div>
             )}
             
-            <div className="p-4">
-                <div className="flex justify-between text-sm text-neutral-600 dark:text-neutral-400">
-                    <span>{post.likes} Suka</span>
+            <div className="px-4 pb-2 pt-1">
+                <div className="flex justify-between text-xs font-medium text-neutral-500 dark:text-neutral-400 mb-3">
+                    <span className="flex items-center gap-1"><HeartIcon className="w-3.5 h-3.5" /> {post.likes}</span>
                     <span>{comments.length} Komentar</span>
                 </div>
-                <div className="border-t dark:border-neutral-700 my-2"></div>
-                <div className="grid grid-cols-3 gap-1">
-                    <button onClick={handleLike} className={`flex items-center justify-center gap-2 p-2 rounded-lg transition-colors font-semibold ${isLiked ? 'text-red-500 bg-red-500/10' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700'}`}>
-                        <HeartIcon className="w-5 h-5" fill={isLiked ? 'currentColor' : 'none'} />
-                        <span>Suka</span>
+                
+                <div className="grid grid-cols-3 gap-2 border-t dark:border-neutral-700 pt-2 pb-2">
+                    <button onClick={handleLike} className={`flex items-center justify-center gap-2 py-1.5 rounded-lg transition-all text-sm font-semibold active:scale-95 ${isLiked ? 'text-red-500 bg-red-50 dark:bg-red-500/10' : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700'}`}>
+                        <HeartIcon className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
+                        <span className="hidden sm:inline">Suka</span>
                     </button>
-                    <button onClick={handleToggleComments} className="flex items-center justify-center gap-2 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 font-semibold">
+                    <button onClick={handleToggleComments} className="flex items-center justify-center gap-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 font-semibold text-sm transition-colors active:scale-95">
                         <ChatBubbleIcon className="w-5 h-5" />
-                        <span>Komentar</span>
+                        <span className="hidden sm:inline">Komentar</span>
                     </button>
-                     <button onClick={handleShare} className="flex items-center justify-center gap-2 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 font-semibold transition-colors">
+                     <button onClick={handleShare} className="flex items-center justify-center gap-2 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 font-semibold text-sm transition-colors active:scale-95">
                         <ShareIcon className="w-5 h-5" />
-                        <span>Bagikan</span>
+                        <span className="hidden sm:inline">Bagikan</span>
                     </button>
                 </div>
             </div>
             
             {showComments && (
-                <div className="p-4 border-t dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 animate-fade-in">
-                    <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                <div className="px-4 py-3 border-t dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 animate-fade-in">
+                    <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1 custom-scrollbar">
                         {topLevelComments.length > 0 ? (
                             topLevelComments.map(comment => (
                                 <CommentItem
@@ -199,7 +208,10 @@ const PostCard: React.FC<PostCardProps> = ({ post: initialPost }) => {
                                 />
                             ))
                         ) : (
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400 text-center py-4">Jadilah yang pertama berkomentar.</p>
+                            <div className="text-center py-6 text-neutral-400">
+                                <p className="text-sm">Belum ada komentar.</p>
+                                <p className="text-xs mt-1">Jadilah yang pertama berkomentar!</p>
+                            </div>
                         )}
                     </div>
                     {isAuthenticated && (
