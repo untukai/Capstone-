@@ -3,17 +3,15 @@ import React from 'react';
 import { UserIcon, MailIcon, LinkedInIcon, TwitterIcon } from '../components/Icons';
 
 const helixData = [
-  { name: 'Akademisi', role: 'Penelitian, inovasi, dan pelatihan untuk meningkatkan kapasitas UMKM.', partners: ['Universitas Karawang', 'Pusat Riset Teknologi Tepat Guna'] },
-  { name: 'Pemerintah', role: 'Dukungan regulasi, perizinan, dan program pendampingan untuk menciptakan ekosistem yang kondusif.', partners: ['Dinas Koperasi & UMKM Karawang', 'Pemkab Karawang'] },
-  { name: 'Bisnis', role: 'Pendanaan, investasi, kemitraan strategis, dan akses pasar yang lebih luas.', partners: ['Kamar Dagang dan Industri (KADIN)', 'Asosiasi Pengusaha Indonesia (APINDO)'] },
-  { name: 'Komunitas & Media', role: 'Promosi, advokasi, dan penyebaran informasi untuk membangun jaringan dan meningkatkan visibilitas UMKM.', partners: ['Komunitas UMKM Karawang', 'Media Lokal Karawang', 'Influencer Lokal'] },
-  { name: 'Lingkungan', role: 'Mendorong praktik bisnis berkelanjutan dan penggunaan bahan baku ramah lingkungan untuk UMKM yang lebih hijau.', partners: ['Dinas Lingkungan Hidup', 'Komunitas Peduli Lingkungan', 'Bank Sampah Karawang'] },
+  { name: 'Akademisi', role: 'Penelitian, inovasi, dan pelatihan untuk meningkatkan kapasitas UMKM.' },
+  { name: 'Pemerintah', role: 'Dukungan regulasi, perizinan, dan program pendampingan untuk menciptakan ekosistem yang kondusif.' },
+  { name: 'Bisnis', role: 'Pendanaan, investasi, kemitraan strategis, dan akses pasar yang lebih luas.' },
+  { name: 'Komunitas & Media', role: 'Promosi, advokasi, dan penyebaran informasi untuk membangun jaringan dan meningkatkan visibilitas UMKM.' },
+  { name: 'Lingkungan', role: 'Mendorong praktik bisnis berkelanjutan dan penggunaan bahan baku ramah lingkungan untuk UMKM yang lebih hijau.' },
 ];
 
 const founders = [
-    { name: 'Surya Agung Perkasa', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop', contact: { email: '#', linkedin: '#', twitter: '#' } },
-    { name: 'Gemini', image: 'https://images.unsplash.com/photo-1678384432426-8804a99131a4?w=200&h=200&fit=crop', contact: { email: '#', linkedin: '#', twitter: '#' } },
-    { name: 'Chat GPT', image: 'https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=200&h=200&fit=crop', contact: { email: '#', linkedin: '#', twitter: '#' } }
+    { name: 'Surya Agung Perkasa', image: 'https://i.ibb.co.com/YFcgMVsw/Screenshot-2025-12-07-170359.png', contact: { email: '#', linkedin: '#', twitter: '#' } }
 ];
 
 
@@ -27,15 +25,9 @@ const CollaborationPage: React.FC = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {helixData.map(item => (
-            <div key={item.name} className="border border-primary/20 dark:border-primary/40 p-6 rounded-lg bg-primary/5 dark:bg-primary/10">
+            <div key={item.name} className="border border-primary/20 dark:border-primary/40 p-6 rounded-lg bg-primary/5 dark:bg-primary/10 hover:shadow-md transition-shadow">
               <h2 className="text-2xl font-bold text-primary-dark dark:text-primary">{item.name}</h2>
-              <p className="text-neutral-700 dark:text-neutral-200 mt-2">{item.role}</p>
-              <div className="mt-4">
-                <h3 className="font-semibold text-neutral-800 dark:text-neutral-100">Contoh Mitra:</h3>
-                <ul className="list-disc list-inside text-sm text-neutral-600 dark:text-neutral-300">
-                  {item.partners.map(partner => <li key={partner}>{partner}</li>)}
-                </ul>
-              </div>
+              <p className="text-neutral-700 dark:text-neutral-200 mt-3 leading-relaxed">{item.role}</p>
             </div>
           ))}
         </div>
@@ -48,10 +40,10 @@ const CollaborationPage: React.FC = () => {
             </p>
 
             <h2 className="text-2xl font-bold text-center mb-8 text-neutral-800 dark:text-neutral-100">Tim Pendiri</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex justify-center flex-wrap gap-8">
               {founders.map(founder => (
-                <div key={founder.name} className="flex flex-col items-center text-center">
-                  <div className="w-32 h-32 rounded-full bg-neutral-200 dark:bg-neutral-700 mb-4 flex items-center justify-center overflow-hidden">
+                <div key={founder.name} className="flex flex-col items-center text-center max-w-xs">
+                  <div className="w-32 h-32 rounded-full bg-neutral-200 dark:bg-neutral-700 mb-4 flex items-center justify-center overflow-hidden border-4 border-white dark:border-neutral-600 shadow-md">
                     {founder.image ? (
                         <img src={founder.image} alt={founder.name} className="w-full h-full object-cover" />
                     ) : (
